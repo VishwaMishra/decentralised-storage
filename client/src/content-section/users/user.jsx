@@ -420,6 +420,7 @@ class User extends Component {
       console.log(error);
     }
   };
+  
   //Function to store files in the ipfs
   onDrop = async (file) => {
     var result = "";
@@ -714,7 +715,7 @@ class User extends Component {
     let uploadProcess = this.state.uploadProcess;
     uploadProcess.connectToMetaMask = "complete";
     uploadProcess.confirmationPayment = "process";
-
+    //ethereum.autoRefreshOnNetworkChange = true;
     console.log("Connectiong to MetaMask is done successfully");
 
     this.setState({

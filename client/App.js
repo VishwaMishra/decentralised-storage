@@ -153,7 +153,7 @@ class App extends Component {
         this.setState({ accounts: changedAccounts });
         console.log(this.state.accounts[0]);
 
-        const { accounts, contract } = this.state;
+        //const { accounts, contract } = this.state;
 
         this.getFiles();
       });
@@ -187,74 +187,74 @@ class App extends Component {
   };
 
   //Function to store files in the ipfs
-  onDrop = async file => {
-    var result = "";
-    const scope = this;
-    try {
-      var handleReceipt = (error, receipt) => {
-        if (error) console.error(error);
-        else {
-          console.log(receipt);
-        }
-      };
-      console.log(file);
-      const { contract, accounts } = this.state;
-      await this.encryption(file);
-      setTimeout(async () => {
-        console.log(scope.state.encryptFile);
-        const encryptFile = scope.state.encryptFile;
-        const fileExt = encryptFile.name.split(".");
-        const blob = new Blob(encryptFile.data, {
-          type: mimeTypes.contentType(fileExt[fileExt.length - 1])
-        });
-        const uploadFile = new File([blob], file.name);
-        const streamData = new fileReaderPullStream(uploadFile);
-        result = await ipfs.add(streamData);
-        console.log("Result value ");
-        console.log(result);
-        const timestamp = Math.round(+new Date() / 1000);
-        const type = file.name.substr(file.name.lastIndexOf(".") + 1);
-        let uploaded = contract.methods
-          .add(result[0].hash, file.name, type, timestamp)
-          .send({ from: accounts[0], gas: 300000 });
-        console.log(uploaded);
-        console.log(this.state.web3);
+  // onDrop = async file => {
+  //   var result = "";
+  //   const scope = this;
+  //   try {
+  //     var handleReceipt = (error, receipt) => {
+  //       if (error) console.error(error);
+  //       else {
+  //         console.log(receipt);
+  //       }
+  //     };
+  //     console.log(file);
+  //     const { contract, accounts } = this.state;
+  //     await this.encryption(file);
+  //     setTimeout(async () => {
+  //       console.log(scope.state.encryptFile);
+  //       const encryptFile = scope.state.encryptFile;
+  //       const fileExt = encryptFile.name.split(".");
+  //       const blob = new Blob(encryptFile.data, {
+  //         type: mimeTypes.contentType(fileExt[fileExt.length - 1])
+  //       });
+  //       const uploadFile = new File([blob], file.name);
+  //       const streamData = new fileReaderPullStream(uploadFile);
+  //       result = await ipfs.add(streamData);
+  //       console.log("Result value ");
+  //       console.log(result);
+  //       const timestamp = Math.round(+new Date() / 1000);
+  //       const type = file.name.substr(file.name.lastIndexOf(".") + 1);
+  //       let uploaded = contract.methods
+  //         .add(result[0].hash, file.name, type, timestamp)
+  //         .send({ from: accounts[0], gas: 300000 });
+  //       console.log(uploaded);
+  //       console.log(this.state.web3);
 
-        //Here we will be getting account address of available peers online
-        let depositAmount = contract.methods
-          .depositsFund([
-            "0xE028aBA988CB3f65c752BC2703458F073d7E164B",
-            "0x0830d1517A6BB9AeAEdD222b00Ef5aB2E68d124C"
-          ])
-          .send({
-            from: accounts[0],
-            value: this.state.web3.utils.toWei("0.05", "ether")
-          });
-      }, 10);
+  //       //Here we will be getting account address of available peers online
+  //       let depositAmount = contract.methods
+  //         .depositsFund([
+  //           "0xE028aBA988CB3f65c752BC2703458F073d7E164B",
+  //           "0x0830d1517A6BB9AeAEdD222b00Ef5aB2E68d124C"
+  //         ])
+  //         .send({
+  //           from: accounts[0],
+  //           value: this.state.web3.utils.toWei("0.05", "ether")
+  //         });
+  //     }, 10);
 
-      // const stream = fileReaderPullStream(this.state.encryptFile);
-      // console.log(typeof stream);
+  //     // const stream = fileReaderPullStream(this.state.encryptFile);
+  //     // console.log(typeof stream);
 
-      const timestamp = Math.round(+new Date() / 1000);
-      const type = file.name.substr(file.name.lastIndexOf(".") + 1);
-      let uploaded = await contract.methods
-        .add(result[0].hash, file.name, type, timestamp)
-        .send({ from: accounts[0], gas: 300000 });
-      console.log(uploaded);
-      console.log(this.state.web3);
-      this.state.web3.eth.sendTransaction(
-        {
-          from: accounts[0],
-          to: "0xa98996860DfBc4DdB5b46A74ac4d07eA7a82d3A4",
-          value: this.state.web3.utils.toWei("0.05", "ether")
-        },
-        handleReceipt
-      );
-      this.getFiles();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     const timestamp = Math.round(+new Date() / 1000);
+  //     const type = file.name.substr(file.name.lastIndexOf(".") + 1);
+  //     let uploaded = await contract.methods
+  //       .add(result[0].hash, file.name, type, timestamp)
+  //       .send({ from: accounts[0], gas: 300000 });
+  //     console.log(uploaded);
+  //     console.log(this.state.web3);
+  //     this.state.web3.eth.sendTransaction(
+  //       {
+  //         from: accounts[0],
+  //         to: "0xa98996860DfBc4DdB5b46A74ac4d07eA7a82d3A4",
+  //         value: this.state.web3.utils.toWei("0.05", "ether")
+  //       },
+  //       handleReceipt
+  //     );
+  //     this.getFiles();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   deriveDecryptionSecretKey = async salt => {
     let cryptoParams = this.state.cryptoParams;

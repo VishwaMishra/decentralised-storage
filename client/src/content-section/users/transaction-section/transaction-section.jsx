@@ -270,7 +270,7 @@ class TransactionSection extends Component {
             <div className="descript-text">Current Balance</div>
           </div>
         </div>
-        {this.props.account.files.length ? (
+        {/* {this.props.account.files.length ? (
           <div className="content-section">
             <div className="top-section">
               <div className="tab-holder">
@@ -294,7 +294,7 @@ class TransactionSection extends Component {
               {this.getTransactions()}
             </div>
           </div>
-        ) : null}
+        ) : null} */}
       </div>
     );
   }

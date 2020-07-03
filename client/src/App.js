@@ -1,10 +1,12 @@
 //import default
 import "./App.css";
 import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
 import getWeb3 from "./utils/getWeb3";
 
-import metamaskLogo from "./asserts/metamask-logo.png";
+//import metamaskLogo from "./asserts/metamask-logo.png";
 import User from "./content-section/users/user";
+import Peers from "./peers/peers";
 
 class App extends Component {
   state = {
@@ -32,10 +34,22 @@ class App extends Component {
     }
   };
 
+  // getFund = () => {
+  //   const { accounts, contract } = this.state;
+  //   setTimeout(() => {
+  //     let getFund = contract.methods
+  //       .withdraw(accounts[0])
+  //       .send({ from: accounts[0], gas: 300000 });
+  //   }, 1);
+  // };
+
   render() {
     return (
-      <React.Fragment>
-        <User />
+      <div className="content">
+        <Switch>
+          <Route exact path="/" component={User} />
+          <Route path="/peers" component={Peers} />
+        </Switch>
         {/* <div className="App">
           <nav>
             <div className="logo">Logo</div>
@@ -67,7 +81,7 @@ class App extends Component {
             </div>
           </div>
         ) : null} */}
-      </React.Fragment>
+      </div>
     );
   }
 }

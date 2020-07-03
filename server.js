@@ -15,5 +15,5 @@ app.use("/api/files/ipfs", require("./routes/api/ipfsConfig"));
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
-  console.log("Server listining on port ", port);
+  console.log("Server listening on port ", port);
 });

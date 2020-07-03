@@ -1,0 +1,35 @@
+.payment-accept-button {
+  padding: 16px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 20px;
+  right: 195px;
+  float: right;
+}
+p {
+  color: #112d4e;
+  font-size: 20px;
+  font-family: Nunito-Bold;
+  font-weight: 700;
+  margin: 0;
+}
+span {
+  color: #979797;
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 3px;
+  font-family: Nunito-SemiBold;
+}
+button {
+  width: 86px;
+  height: 36px;
+  color: #fff;
+  margin: 0 0 0 33px;
+  background-color: #112d4e;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: Nunito-SemiBold;
+}
